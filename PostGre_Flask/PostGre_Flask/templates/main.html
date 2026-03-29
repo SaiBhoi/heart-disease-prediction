@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heart Disease Prediction</title>
+    <script src="https://kit.fontawesome.com/5f3f547070.js" crossorigin="anonymous"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            background: linear-gradient(135deg, #ff4d4d, #cc0000);
+            padding: 1rem 2rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 600;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .username {
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 20px;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-links a:hover {
+            background: rgba(255,255,255,0.15);
+            transform: translateY(-2px);
+        }
+
+        /* Main Content */
+        .main-container {
+            flex: 1;
+            margin-top: 80px;
+            padding: 2rem;
+            animation: fadeIn 0.6s ease;
+        }
+
+        /* Form Container */
+        .form-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        /* Form Elements */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+            color: #641212;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        label i {
+            color: #ff4d4d;
+            width: 25px;
+            font-size: 1.1rem;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #eee;
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: #ff4d4d;
+            box-shadow: 0 0 12px rgba(255,77,77,0.15);
+        }
+
+        /* Predict Button */
+        .my-cta-button {
+            background: linear-gradient(135deg, #ff4d4d, #cc0000);
+            color: white;
+            border: none;
+            padding: 1.2rem 2.5rem;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            width: 100%;
+            margin-top: 1.5rem;
+        }
+
+        .my-cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(255,77,77,0.3);
+        }
+
+        /* Footer */
+        .site-footer {
+            background: linear-gradient(135deg, #ff4d4d, #cc0000);
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: auto;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 1rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .form-container {
+                padding: 1.5rem;
+            }
+
+            .my-cta-button {
+                padding: 1rem 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.3rem;
+            }
+
+            .nav-links a {
+                padding: 6px 12px;
+                font-size: 0.9rem;
+            }
+
+            label {
+                font-size: 0.95rem;
+            }
+
+            input, select {
+                padding: 0.8rem;
+                font-size: 0.95rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <i class="fas fa-heartbeat"></i>
+                HeartCare
+            </a>
+            <div class="nav-links">
+                <span class="username">
+                    <i class="fas fa-user-circle"></i> {{ current_user.username }}
+                </span>
+                <a href="/logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <div class="form-container">
+            <form action="{{ url_for('predict')}}" method="post">
+                <div class="form-group">
+                    <label><i class="fas fa-user"></i> Age</label>
+                    <input type="text" name="age" placeholder="Enter your age" required>
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fas fa-venus-mars"></i> Gender</label>
+                    <select name="sex" required>
+                        <option value="" disabled selected>Select Gender</option>
+                        <option value="1">Male</option>
+                        <option value="0">Female</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fas fa-heart"></i> Chest Pain Type</label>
+                    <select name="cp" required>
+                        <option value="" disabled selected>Select Chest Pain Type</option>
+                        <option value="0">Typical Angina</option>
+                        <option value="1">Atypical Angina</option>
+                        <option value="2">Non-anginal Pain</option>
+                        <option value="3">Asymptomatic</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fas fa-tachometer-alt"></i> Blood Pressure</label>
+                    <input type="text" name="trestbps" placeholder="mmHg (94-200)" required>
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fas fa-prescription-bottle"></i> Cholesterol</label>
+                    <input type="text" name="chol" placeholder="mg/dl (126-564)" required>
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fas fa-syringe"></i> Blood Sugar</label>
+                    <select name="fbs" required>
+                        <option value="" disabled selected>Select Blood Sugar Level</option>
+                        <option value="1">> 120 mg/dl</option>
+                        <option value="0">< 120 mg/dl</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fas fa-waveform-path"></i> ECG Results</label>
+                    <select name="restecg" required>
+                        <option value="" disabled selected>Select ECG Results</option>
+                        <option value="0">Normal</option>
+                        <option value="1">ST-T Abnormality</option>
+                        <option value="2">Ventricular Hypertrophy</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fas fa-heartbeat"></i> Max Heart Rate</label>
+                    <input type="text" name="thalach" placeholder="bpm (71-202)" required>
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fas fa-running"></i> Exercise Angina</label>
+                    <select name="exang" required>
+                        <option value="" disabled selected>Select Exercise Angina</option>
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fas fa-chart-line"></i> ST Depression</label>
+                    <input type="text" name="oldpeak" placeholder="ST Depression (0-6.2)" required>
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fas fa-chart-line"></i> ST Slope</label>
+                    <select name="slope" required>
+                        <option value="" disabled selected>Select ST Slope</option>
+                        <option value="0">Upsloping</option>
+                        <option value="1">Flat</option>
+                        <option value="2">Downsloping</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fas fa-vial"></i> Major Vessels</label>
+                    <input type="text" name="ca" placeholder="Number (0-4)" required>
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fas fa-dna"></i> Thalassemia</label>
+                    <select name="thal" required>
+                        <option value="" disabled selected>Select Thalassemia</option>
+                        <option value="0">Normal</option>
+                        <option value="1">Fixed Defect</option>
+                        <option value="2">Reversible Defect</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="my-cta-button">
+                    <i class="fas fa-heartbeat"></i> Analyze Risk
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>© 2023 HeartCare. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms & Conditions | HeartCare</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #ff4d4d, #f2ecec);
+            min-height: 100vh;
+            padding-top: 80px;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            background: linear-gradient(135deg, #ff4d4d, #cc0000);
+            padding: 1rem 2rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 600;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Terms Content */
+        .terms-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 3rem 2rem 2rem;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            animation: fadeIn 0.6s ease;
+            position: relative;
+        }
+
+        .terms-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, #ff4d4d, #cc0000);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .terms-content p {
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Back Button */
+        .back-btn {
+            background: linear-gradient(135deg, #ff4d4d, #cc0000);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 30px;
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 1;
+        }
+
+        .back-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255,77,77,0.3);
+        }
+
+        /* Footer */
+        .site-footer {
+            background: linear-gradient(135deg, #ff4d4d, #cc0000);
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            .terms-container {
+                margin: 1.5rem;
+                padding: 2.5rem 1.5rem 1.5rem;
+            }
+            
+            .terms-title {
+                font-size: 2rem;
+                margin-top: 1rem;
+            }
+
+            .back-btn {
+                top: 15px;
+                left: 15px;
+                padding: 10px 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .terms-container {
+                margin: 1rem;
+                padding: 2rem 1rem 1rem;
+            }
+
+            .terms-title {
+                font-size: 1.8rem;
+                margin-top: 1.5rem;
+            }
+
+            .back-btn {
+                top: 10px;
+                left: 10px;
+                padding: 8px 16px;
+                font-size: 0.9rem;
+            }
+
+            .back-btn i {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <i class="fas fa-heartbeat"></i>
+                HeartCare
+            </a>
+        </div>
+    </nav>
+
+    <!-- Terms Content -->
+    <div class="terms-container">
+        <button class="back-btn" onclick="history.back()">
+            <i class="fas fa-arrow-left"></i>
+            Back
+        </button>
+        
+        <h1 class="terms-title">Terms & Conditions</h1>
+        
+        <div class="terms-content">
+            <p>This application is to only make you aware of the chance of user getting a Heart Stroke.</p>
+            <p>The application provides information for educational and informational purposes only and is not a substitute for professional medical advice, diagnosis, or treatment.</p>
+            <p>The information provided by this application is only 81.33% accurate.</p>
+            <p>Users should not use the application to self-diagnose or self-treat medical conditions.</p>
+            <p>The user must consult with a medical expert before taking any sort of treatment.</p>
+            <p>The application may contain inaccuracies or outdated information.</p>
+            <p>The application is not intended for use in emergency situations.</p>
+            <p>The user must take on the responsibility of any privacy breach on their own.</p>
+            <p>The application content may change over time.</p>
+            <p>The application that is being used is not clinically proven. Use it at your own risk.</p>
+            <p>Any harm done will be the responsibility of the user.</p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <p class="mb-0">© 2023 HeartCare. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
